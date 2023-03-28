@@ -1,4 +1,3 @@
-
 import sys
 
 from colomoto_jupyter.sessionfiles import new_output_file
@@ -237,6 +236,18 @@ def to_ginsim(model, ensure_layout=True,
     if ensure_layout and not model.hasLayout():
         autolayout(model, method=layout_method, scale=layout_scale)
     return japi.gs.load(model)
+
+
+def to_modrev(model):
+    # Save the model in a bioLQM-supported format (e.g., "lp")
+    modrev_file = new_output_file("lp")
+    assert save(model, modrev_file, "lp")
+
+    modrev = import_colomoto_tool("modrev")
+    # Load the modrev model
+    modrev_model = modrev.load(modrev_file)
+
+    return modrev_model
 
 def to_maboss(model):
     maboss = import_colomoto_tool("maboss")
