@@ -243,7 +243,7 @@ def to_modrev(model):
     modrev_file = new_output_file("lp")
     assert save(model, modrev_file, "lp")
 
-    modrev = import_colomoto_tool("modrev")
+    modrev = import_colomoto_tool("pymodrev")
     # Load the modrev model
     modrev_model = modrev.load(modrev_file)
 
